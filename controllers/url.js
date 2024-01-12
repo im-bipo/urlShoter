@@ -1,3 +1,5 @@
+const url = require('url')
+
 const shortid = require("shortid");
 const validUrl = require("valid-url");
 
@@ -17,6 +19,10 @@ const handleCreateShotUrl = async (req, res) => {
       shotId: shortID,
       visitHistory: [],
     });
+    return res.render('url',{
+      newUrlId : {shortId : shortID , ReUrl : req.body.url, host : url.host}
+    })
+
     return res.json({
       msg: "url recived",
       url: req.body.url,

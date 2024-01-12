@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #3498db;
+            color: #fff;
+            border-bottom: 1px solid #2980b9;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #2ecc71;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        table {
+            width: calc(100% - 40px); /* Adjusted width to include padding */
+            margin: 20px; /* Added margin to all sides */
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="header">Url shoter</h1>
+    <form method="POST" action="/url" class="form">
+        <label for="url">Enter the url</label>
+        <input type="text" name="url" placeholder="https://google.com">
+        <button type="submit">Generate</button>
+    </form>
+    <% if (locals.Urls) { %>
+    <table class="lists">
+        <thead>
+            <tr>
+                <td>SN</td>
+                <td>ID</td>
+                <td>Urls</td>
+                <td>No of clicks</td>
+            </tr>
+        </thead>
+            
+            <% Urls.forEach((url,index)=> { %>
+                    <tr>
+                        <td><%= index+1 %></td>
+                        <td><%=url.shotId%></td>
+                        <td><%=url.redirectUrl%></td>
+                        <td><%=url.visitHistory.length%></td>
+                    </tr>
+                    <% });%>
+                </table>
+                <% } %>
+</body>
+
+</html>
