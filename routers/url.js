@@ -1,9 +1,20 @@
 const express = require("express");
-const { handleCreateShotUrl, handleGetAllUrl, handleRedirectById } = require("../controllers/url");
+
+//middleware for auth
+const {restrictToLoginUser} = require("../middlewares/auth");
+
+
+const {
+  handleCreateShotUrl,
+  handleRedirectById,
+} = require("../controllers/url");
 
 const urlRouter = express.Router();
 
-urlRouter.route("/").get(handleGetAllUrl).post(handleCreateShotUrl);
-urlRouter.route("/:id").get(handleRedirectById)
+urlRouter
+  .route("/")
+  .get((req, res) => res.redirect("/"))
+  .post(restrictToLoginUser, handleCreateShotUrl);
+urlRouter.route("/:id").get(handleRedirectById);
 
 module.exports = urlRouter;
