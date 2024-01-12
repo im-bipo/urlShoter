@@ -24,14 +24,14 @@ const handleGetAllUrl = async (req, res) => {
   <div>
   ${allUrls
     .map(
-        (url) => `
+      (url) => `
         <ul>
         <li>Original Url : ${url.redirectUrl}</li>
-        <li>Short Url : ${url.shotId}</li>
+        <li>Short Url : <a href="http://localhost:8000/url/${url.shotId}" target="_blank">${url.shotId}</a></li>
         <li>Number Of Clicks : ${url.visitHistory.length}</li>
         </ul>`
-        )
-        .join("")}
+    )
+    .join("")} 
         </div>
         </section>
         </body>
@@ -40,10 +40,23 @@ const handleGetAllUrl = async (req, res) => {
   res.send(html);
 };
 
-const handleRedirectById = async (req,res) =>{
-    const id = req.params.id
-    // const urlDetail = await URL.findOne}, )
-    res.json({msg : 'recived ' , id : id})
-}
+const handleRedirectById = async (req, res) => {
+  const shotId = req.params.id;
+  const entry  = await URL.findOneAndUpdate(
+    { shotId },{
+        $push :{
+            visitHistory : {
+                timeStamp : Date.now()
+            }
+        }
+    }
+  );
+    console.log(entry);
+    try {
+        res.redirect(entry.redirectUrl);
+    } catch (err) {
+        res.send(`<h1>your url is invalid</h1>`)
+    }
+};
 
-module.exports = { handleCreateShotUrl, handleGetAllUrl,handleRedirectById };
+module.exports = { handleCreateShotUrl, handleGetAllUrl, handleRedirectById };
