@@ -1,6 +1,9 @@
-const express = require('express')
-const { handleCreateShotUrl } = require('../controllers/url')
+const express = require("express");
+const { handleCreateShotUrl, handleGetAllUrl, handleRedirectById } = require("../controllers/url");
 
-const router = express.router()
+const urlRouter = express.Router();
 
-router.post('/url',(handleCreateShotUrl))
+urlRouter.route("/").get(handleGetAllUrl).post(handleCreateShotUrl);
+urlRouter.route("/:id").get(handleRedirectById)
+
+module.exports = urlRouter;
