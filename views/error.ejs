@@ -1,4 +1,4 @@
-<!-- newRequestPage.html -->
+<!-- errror.html -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Request</title>
+    <title>Error</title>
     <style>
         body {
             margin: 0;
@@ -73,14 +73,20 @@
 <body>
     <div class="container">
         <header>
-            <h1>URL Shortener</h1>
+            <h1>Error</h1>
         </header>
         <div class="newRequest">
-            <% if (locals.newUrlId) { %>
+            <% if (locals.msg === 'Invalid Url' ) { %>
                 <ul>
-                    <li>Original Url: <%= newUrlId.ReUrl %></li>
-                    <li>Short Url ID: <span class="shotUrl"><%= newUrlId.shortId %></span></li>
-                    <li>New Url: <a href='<%=newUrlId.host%>' target="_blank">newUrlId.host</a> <%= %></li>
+                    <li>Error Message: <%= locals.msg %></li>
+                    <li>Valid Url Example: <%= locals.UrlExample %></li>
+                    <li>Your request: <%= locals.req %></li>
+                </ul>
+            <% } %>
+            <% if (locals.msg === 'Url Required' ) { %>
+                <ul>
+                    <li>Error Message: <%= locals.msg %></li>
+                    <li>Valid Url Example: <%= locals.UrlExample %></li>
                 </ul>
             <% } %>
             <button class="home"><a href="/">Back to Home</a></button>

@@ -11,7 +11,6 @@
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f5f5f5;
-            overflow: hidden;
         }
 
         .container {
@@ -20,7 +19,6 @@
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-            overflow: hidden;
         }
 
         .header {
@@ -93,15 +91,6 @@
             font-size: 16px;
         }
 
-        .logout-btn {
-            background-color: #e74c3c;
-            color: #fff;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
 
         table {
             width: calc(100% - 40px);
@@ -173,18 +162,14 @@
                 font-size: 14px;
             }
 
-            .logoin-btn,
-            .logout-btn {
-                width: 40%;
-                margin-left: 80%;
-                margin-bottom: 10px;
-            }
 
             table {
                 width: 100%;
                 margin: 0px;
-                overflow-x: hidden;
                 /* Add this property */
+            }
+            .table{
+                overflow-x: scroll;
             }
 
             th,
@@ -219,6 +204,7 @@
         <button type="submit">Generate</button>
     </form>
     <% if (locals.Urls) { %>
+        <div class="table">
         <table class="lists">
             <thead>
                 <tr>
@@ -246,6 +232,7 @@
                 </tr>
                 <% }); %>
         </table>
+        </div>
         <% } %>
 
             <script>

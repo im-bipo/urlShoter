@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require('path')
 const cookieParser = require('cookie-parser')
+const dotenv = require('dotenv')
 
 const connectMongoDb = require("./connection");
 
@@ -8,14 +9,13 @@ const urlRouter = require("./routers/url");
 const pageRouter = require("./routers/pageRoutes");
 const userRouter = require("./routers/user");
 
-const restrictToLoginUser = require("./middlewares/auth");
-
+dotenv.config()  
 
 const app = express();
-const port = 8000;
+const port = process.env.PORT;
 
 //connect database
-connectMongoDb('mongodb://127.0.0.1:27017/urlShoter')
+connectMongoDb(process.env.DB_URL)  
 
 //middleware
 app.use(express.json())
